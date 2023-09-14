@@ -12,4 +12,5 @@ jobs:
     - uses: php-actions/phpunit@v3
       with:
         php_extensions : gd
+        coverage_clover: "coverage/clover.xml"
     # ... then your own project steps ...
