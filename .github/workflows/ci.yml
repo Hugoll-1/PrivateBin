@@ -17,12 +17,16 @@ jobs:
         php_extensions : 'gd mbstring xdebug'
         coverage_cobertura: "coverage.xml"
         version : '9.6.11'
-        path: src/
-        standard: phpcs.xml
         
     - name: Upload Code Coverage
       uses: actions/upload-artifact@v2
       with:
         name: code-coverage
         path: coverage.xml
+
+    - name: PHP Code Sniffer
+      uses: php-actions/phpcs@v1
+      with:
+        path: src/
+        standard: phpcs.xml
     # ... then your own project steps ...
