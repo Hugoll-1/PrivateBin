@@ -16,4 +16,13 @@ jobs:
         php_extensions : 'gd mbstring xdebug'
         coverage_cobertura: "coverage.xml"
         version : '9.6.11'
+        
+    - name: Run PHPUnit with Code Coverage
+      run: |
+          vendor/bin/phpunit --coverage-clover=coverage.xml
+    - name: Upload Code Coverage
+      uses: actions/upload-artifact@v2
+      with:
+        name: code-coverage
+        path: coverage.xml
     # ... then your own project steps ...
