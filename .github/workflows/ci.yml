@@ -1,32 +1,27 @@
 name: CI
-
 on: [push]
-
 jobs:
   build-test:
     runs-on: ubuntu-latest
-
     steps:
     - uses: actions/checkout@v3
     - uses: php-actions/composer@v6 # or alternative dependency management
     - uses: php-actions/phpunit@v3
-    - uses: php-actions/phpcs@v1
-      env:
-          XDEBUG_MODE: coverage
       with:
-        php_extensions : 'gd mbstring xdebug'
-        coverage_cobertura: "coverage.xml"
         version : '9.6.11'
-        
+        php_extensions: 'gd mbstring xdebug'
+        configuration: 'phpunit.xml'
+        coverage_cobertura: 'coverage.xml'
+      env:
+        XDEBUG_MODE: coverage
+      
+    - name: Code Coverage Report
+      uses: irongut/CodeCoverageSummary@v1.3.0
+      with:
+        filename: 'coverage.xml'
+
     - name: Upload Code Coverage
       uses: actions/upload-artifact@v2
       with:
         name: code-coverage
         path: coverage.xml
-
-    - name: PHP Code Sniffer
-      uses: php-actions/phpcs@v1
-      with:
-        path: src/
-        standard: phpcs.xml
-    # ... then your own project steps ...
