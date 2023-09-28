@@ -40,4 +40,4 @@ jobs:
         php_version: 8.1
         path: src/
         output: text
-        ruleset: rulset.xml
+        ruleset: rulset.php
