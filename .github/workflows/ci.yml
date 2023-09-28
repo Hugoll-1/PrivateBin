@@ -25,3 +25,10 @@ jobs:
       with:
         name: code-coverage
         path: coverage.xml
+
+    - name: PHP Code Sniffer
+      uses: php-actions/phpcs@v1
+      with:
+        php_version: 8.1
+        path: src/
+        standard: phpcs.xml
